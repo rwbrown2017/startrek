@@ -4,7 +4,7 @@ public class Shield {
 
 	private boolean down = true;
 
-	private static int shieldEnergy = 10000;	
+	private static int shieldEnergy ;//= 10000;	
 
 
 	public boolean isDown() {

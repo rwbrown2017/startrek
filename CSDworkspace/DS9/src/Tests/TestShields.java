@@ -14,11 +14,12 @@ public class TestShields {
 	
 	@Before
 	public void init() {
-		ship = new Ship();		
+		ship = new Ship();
+		shield = new Shield();
 	}
 	
 	@Test
-	public void shieldsStartOutLowered() {
+	public void shieldsStartOutLowered() {		
 		assertTrue(shield.isDown());
 	}
 	
@@ -30,14 +31,12 @@ public class TestShields {
 	
 	@Test
 	public void chargeShields(){
-		Shield shield = new Shield();
 		shield.addShieldEnergy(10000);
 		assertTrue(shield.getShieldEnergy() == 10000);
 	}
 	
 	@Test
 	public void overchargedShields(){
-		Shield shield = new Shield();
 		shield.addShieldEnergy(20000);
 		assertTrue(shield.getShieldEnergy() == 10000);
 		
