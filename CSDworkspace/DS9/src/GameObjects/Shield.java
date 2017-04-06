@@ -3,12 +3,10 @@ package GameObjects;
 public class Shield {
 
 	private boolean down = true;
-	private static int reservedEnergy = 10000;
-	private Ship ship;
+	private static int shieldEnergy = 10000;
 	
-	public Shield(Ship ship) {
-		this.reservedEnergy = 10000;
-		this.ship = ship;
+	public Shield() {
+		this.shieldEnergy = 10000;
 	}
 
 	public boolean isDown() {
@@ -20,16 +18,15 @@ public class Shield {
 	}
 
 	public boolean isBuckled() {
-		return reservedEnergy <= 0;
+		return shieldEnergy <= 0;
 	}
 
 	public void buckle() {
-		reservedEnergy = 0;
+		shieldEnergy = 0;
 	}
 
 	public void hit(int i) {
-		if (!isDown())
-		reservedEnergy -= i;
+		shieldEnergy = Integer.min(0, shieldEnergy - i);
 	}
 
 }

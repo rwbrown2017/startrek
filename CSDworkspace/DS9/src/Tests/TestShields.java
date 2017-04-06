@@ -10,12 +10,10 @@ import GameObjects.Ship;
 public class TestShields {
 	
 	Shield shield;
-	Ship ship;
 	
 	@Before
 	public void init() {
-		ship = new Ship();
-		shield = new Shield(ship);
+		shield = new Shield();
 	}
 	
 	@Test
@@ -38,12 +36,6 @@ public class TestShields {
 	public void shieldBuckled() {
 		shield.buckle();
 		assertTrue(shield.isBuckled());
-	}
-	
-	public void shipDamagedAfterBuckledShieldHit() {
-		shield.buckle();
-		shield.hit(1);
-		assertTrue(ship.isDamaged());
 	}
 	
 }
