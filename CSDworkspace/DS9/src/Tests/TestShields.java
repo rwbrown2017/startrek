@@ -13,8 +13,6 @@ public class TestShields {
 	
 	@Before
 	public void init() {
-
-
 		shield = new Shield();
 	}
 	

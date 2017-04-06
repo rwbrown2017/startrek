@@ -8,9 +8,8 @@ public class Shield {
 	private static int shieldEnergy = 10000;
 	
 	public Shield() {
-		this.shieldEnergy = 10000;
+		shieldEnergy = 10000;
 	}
-
 
 	public boolean isDown() {
 		return down;
