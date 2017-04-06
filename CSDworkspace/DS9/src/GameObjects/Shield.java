@@ -3,8 +3,14 @@ package GameObjects;
 public class Shield {
 
 	private boolean down = true;
-	private boolean buckled = false;
+	private static int reservedEnergy = 10000;
+	private Ship ship;
 	
+	public Shield(Ship ship) {
+		this.reservedEnergy = 10000;
+		this.ship = ship;
+	}
+
 	public boolean isDown() {
 		return down;
 	}
@@ -14,16 +20,16 @@ public class Shield {
 	}
 
 	public boolean isBuckled() {
-		return buckled;
+		return reservedEnergy <= 0;
 	}
 
 	public void buckle() {
-		buckled = true;
+		reservedEnergy = 0;
 	}
 
 	public void hit(int i) {
-		// TODO Auto-generated method stub
-		
+		if (!isDown())
+		reservedEnergy -= i;
 	}
 
 }

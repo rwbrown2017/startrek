@@ -14,8 +14,8 @@ public class TestShields {
 	
 	@Before
 	public void init() {
-		shield = new Shield();
 		ship = new Ship();
+		shield = new Shield(ship);
 	}
 	
 	@Test
@@ -45,4 +45,5 @@ public class TestShields {
 		shield.hit(1);
 		assertTrue(ship.isDamaged());
 	}
+	
 }
