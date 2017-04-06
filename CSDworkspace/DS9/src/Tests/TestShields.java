@@ -28,6 +28,21 @@ public class TestShields {
 	}
 	
 	@Test
+	public void chargeShields(){
+		Shield shield = new Shield();
+		shield.addShieldEnergy(10000);
+		assertTrue(shield.getShieldEnergy() == 10000);
+	}
+	
+	@Test
+	public void overchargedShields(){
+		Shield shield = new Shield();
+		shield.addShieldEnergy(20000);
+		assertTrue(shield.getShieldEnergy() == 10000);
+		
+	}
+	
+
 	public void shieldStartsNotBuckled() {
 		assertFalse(shield.isBuckled());
 	}
@@ -37,5 +52,5 @@ public class TestShields {
 		shield.buckle();
 		assertTrue(shield.isBuckled());
 	}
-	
+
 }
