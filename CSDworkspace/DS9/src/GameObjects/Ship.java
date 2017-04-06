@@ -1,13 +1,18 @@
 package GameObjects;
 
 public class Ship {
+	
 	private static int reservedEnergy = 100000;
 	private boolean damaged = false;
 	private boolean functioning = true;
 	private boolean repaired = false;
 	
 	private Shield shield;
-	public Ship (){shield = new Shield();}
+	
+	public Ship (){
+		shield = new Shield();
+	}
+	
 	public Shield getShield() {
 		return shield;
 	}
@@ -24,17 +29,18 @@ public class Ship {
 		return repaired;
 	}
 	
-	public int getReservedEnergy(){
+	public int getReservedEnergy() {
 		return reservedEnergy;
 	}
 	
-	public int transferEnergy(int n){
-		reservedEnergy -=n ;
+	public int transferEnergy(int n) {
+		reservedEnergy -= n;
 		return n;
 	}
 	
 	public void hit(int i) {
 		damaged = true;
 	}
+	
 }
 

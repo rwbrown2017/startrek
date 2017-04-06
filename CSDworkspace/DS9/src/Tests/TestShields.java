@@ -83,6 +83,7 @@ public class TestShields {
 	public void shieldDamaged() {
 		shield.raise();
 		shield.hit(10001);
+		shield.hit(1);
 		assertTrue(shield.isDamaged());
 	}
 
