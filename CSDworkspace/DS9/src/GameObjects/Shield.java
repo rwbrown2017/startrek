@@ -19,6 +19,10 @@ public class Shield {
 	public void raise() {
 		down = false;
 	}
+
+	public void lower() {
+		down = true;
+	}
 	
 	public void addShieldEnergy(int energy){		
 		   shieldEnergy +=energy;

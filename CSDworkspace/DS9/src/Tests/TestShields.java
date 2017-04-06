@@ -28,6 +28,14 @@ public class TestShields {
 		shield.raise();
 		assertFalse(shield.isDown());
 	}
+
+	@Test
+	public void shieldsCanToggle() {
+		shield.raise();
+		assertFalse(shield.isDown());
+		shield.lower();
+		assertTrue(shield.isDown());
+	}
 	
 	@Test
 	public void chargeShields(){

@@ -8,7 +8,7 @@ import org.junit.Test;
 import GameObjects.*;
 
 public class ShipTest {
-	Ship ship ;
+	Ship ship;
 	Shield shield;
 	
 	@Before
@@ -21,7 +21,5 @@ public class ShipTest {
 	public void getInitialReservedEnergy() {		
 		assertTrue(ship.getReservedEnergy() == 100000);
 	}
-	
-	
 
 }
