@@ -8,9 +8,12 @@ import GameObjects.Ship;
 
 public class TestShip {
 	
-
-	Ship ship = new Ship();
-
+	Ship ship;
+	
+	@Before
+	public void init() {
+		ship = new Ship();
+	}
 
 	@Test
 	public void shipDamaged() {
@@ -26,5 +29,18 @@ public class TestShip {
 	public void shipRepaired() {
 		assertFalse(ship.isRepaired());
 	}
+	
+	@Test
+	public void shipHitShieldBuckledSubsystemDamaged() {
+		ship.getShield().buckle();
+		ship.hit(1);
+		assertTrue(ship.isDamaged());
+	}
 
+	@Test
+	public void getInitialReservedEnergy() {
+		Ship aShip = new Ship();
+		assertTrue(aShip.getReservedEnergy() == 100000);
+	}
+	
 }

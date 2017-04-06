@@ -4,7 +4,12 @@ public class Shield {
 
 	private boolean down = true;
 
-	private static int shieldEnergy ;//= 10000;	
+
+	private static int shieldEnergy = 10000;
+	
+	public Shield() {
+		this.shieldEnergy = 10000;
+	}
 
 
 	public boolean isDown() {
@@ -34,9 +39,7 @@ public class Shield {
 	}
 
 	public void hit(int i) {
-		if (!isDown())
-			shieldEnergy -= i;
+		shieldEnergy = Integer.min(0, shieldEnergy - i);
 	}
-
 
 }

@@ -1,4 +1,3 @@
-
 package GameObjects;
 
 public class Ship {
@@ -7,7 +6,11 @@ public class Ship {
 	private boolean functioning = true;
 	private boolean repaired = false;
 	
-	
+	private Shield shield;
+	public Ship (){shield = new Shield();}
+	public Shield getShield() {
+		return shield;
+	}
 	
 	public boolean isDamaged() {
 		return damaged;
@@ -25,10 +28,13 @@ public class Ship {
 		return reservedEnergy;
 	}
 	
-	
 	public int transferEnergy(int n){
 		reservedEnergy -=n ;
 		return n;
+	}
+	
+	public void hit(int i) {
+		damaged = true;
 	}
 }
 
