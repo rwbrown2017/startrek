@@ -1,4 +1,5 @@
 package Tests;
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -13,8 +14,6 @@ public class TestShields {
 	
 	@Before
 	public void init() {
-
-
 		shield = new Shield();
 	}
 	
@@ -38,16 +37,32 @@ public class TestShields {
 	}
 	
 	@Test
-	public void chargeShields(){
-		shield.addShieldEnergy(10000);
-		assertTrue(shield.getShieldEnergy() == 10000);
+	public void shieldsStartingAmount() {
+		assertEquals(10000, shield.getShieldEnergy());
+	}
+
+	@Test
+	public void addShieldEnergy(){
+		shield.removeShieldEnergy(1000);
+		shield.addShieldEnergy(500);
+		assertEquals(9500, shield.getShieldEnergy());
+	}
+
+	@Test
+	public void removeShieldEnergy() {
+		shield.removeShieldEnergy(1);
+		assertEquals(9999, shield.getShieldEnergy());
+
+	@Test
+	public void underchargeShields() {
+		shield.removeShieldEnergy(10001);
+		assertEquals(0, shield.getShieldEnergy());
 	}
 	
 	@Test
 	public void overchargedShields(){
-		shield.addShieldEnergy(20000);
-		assertTrue(shield.getShieldEnergy() == 10000);
-		
+		shield.addShieldEnergy(1);
+		assertEquals(10000, shield.getShieldEnergy());
 	}
 	
 	@Test
@@ -57,7 +72,8 @@ public class TestShields {
 	
 	@Test
 	public void shieldBuckled() {
-		shield.buckle();
+		shield.raise();
+		shield.hit(10001);
 		assertTrue(shield.isBuckled());
 	}
 
