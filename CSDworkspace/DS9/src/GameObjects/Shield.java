@@ -1,14 +1,16 @@
 package GameObjects;
 
-public class Shield {
+public class Shield extends Subsystem {
+
+	public static final int MIN_SHIELD_ENERGY = 0;
+	public static final int MAX_SHIELD_ENERGY = 10000;
 
 	private boolean down = true;
-
-
-	private static int shieldEnergy = 10000;
+	
+	private static int shieldEnergy = MAX_SHIELD_ENERGY;
 	
 	public Shield() {
-		shieldEnergy = 10000;
+		this.shieldEnergy = MAX_SHIELD_ENERGY;		
 	}
 
 	public boolean isDown() {
@@ -18,27 +20,36 @@ public class Shield {
 	public void raise() {
 		down = false;
 	}
-	
-	public void addShieldEnergy(int energy){		
-		   shieldEnergy +=energy;
-		   shieldEnergy = Integer.min(shieldEnergy, 10000);
+
+	public void lower() {
+		down = true;
 	}
 	
-	public int getShieldEnergy(){
+	public void addShieldEnergy(int energy){		
+		   shieldEnergy += energy;
+		   shieldEnergy = Integer.min(shieldEnergy, MAX_SHIELD_ENERGY);
+	}
+
+	public void removeShieldEnergy(int energy){		
+		   shieldEnergy -= energy;
+		   shieldEnergy = Integer.max(shieldEnergy, MIN_SHIELD_ENERGY);
+	}
+	
+	public int getShieldEnergy() {
 		return shieldEnergy;
 	}
 
 
 	public boolean isBuckled() {
-		return shieldEnergy <= 0;
-	}
-
-	public void buckle() {
-		shieldEnergy = 0;
+		return shieldEnergy <= MIN_SHIELD_ENERGY;
 	}
 
 	public void hit(int i) {
-		shieldEnergy = Integer.min(0, shieldEnergy - i);
+		if (isDown() || isBuckled()) {
+			setDamaged(true);
+		} else {
+			removeShieldEnergy(i);
+		}
 	}
 
 }
