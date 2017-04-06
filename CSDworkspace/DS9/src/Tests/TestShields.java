@@ -77,4 +77,11 @@ public class TestShields {
 		assertTrue(shield.isBuckled());
 	}
 
+	@Test
+	public void shieldDamaged() {
+		shield.raise();
+		shield.hit(10001);
+		assertTrue(shield.isDamaged());
+	}
+
 }

@@ -1,6 +1,6 @@
 package GameObjects;
 
-public class Shield {
+public class Shield extends Subsystem {
 
 	private boolean down = true;
 
@@ -42,7 +42,11 @@ public class Shield {
 	}
 
 	public void hit(int i) {
-		shieldEnergy = removeShieldEnergy(i);
+		if (isDown() || isBuckled()) {
+			setDamaged(true);
+		} else {
+			shieldEnergy = removeShieldEnergy(i);
+		}
 	}
 
 }
