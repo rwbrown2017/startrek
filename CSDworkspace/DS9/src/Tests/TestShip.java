@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import GameObjects.RandomizationEngine;
 import GameObjects.Ship;
+import GameObjects.Subsystem;
 
 public class TestShip {
 	
@@ -50,6 +52,19 @@ public class TestShip {
 	@Test
 	public void engineSubsystemExists() {
 		assertNotNull(ship.getEngine());
+	}
+	
+	@Test
+	public void setRandomizer() {
+		RandomizationEngine engine = new RandomizationEngineForTestingOnly(7);
+		ship.setRandomizationEngine(engine);
+		assertEquals(7, ship.getRandomizationEngine().getRandomNumber(10));
+	}
+	
+	public void getRandomSubsystem() {
+		RandomizationEngine engine = new RandomizationEngineForTestingOnly(2);
+		ship.setRandomizationEngine(engine);
+		assertEquals(ship.getEngine(), ship.getRandomSubsystem());
 	}
 	
 }
