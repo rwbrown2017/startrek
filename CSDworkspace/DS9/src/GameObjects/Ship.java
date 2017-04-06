@@ -1,5 +1,7 @@
 package GameObjects;
 
+import java.util.HashMap;
+
 public class Ship {
 	
 	private static int reservedEnergy = 100000;
@@ -7,14 +9,20 @@ public class Ship {
 	private boolean functioning = true;
 	private boolean repaired = false;
 	
-	private Shield shield;
+	HashMap<String, Subsystem> subsystems;
 	
 	public Ship (){
-		shield = new Shield();
+		subsystems = new HashMap<String, Subsystem>();
+		addSubsystems();
+	}
+	
+	public void addSubsystems() {
+		subsystems.put("shield", new Shield());
+		subsystems.put("engine", new Engine());
 	}
 	
 	public Shield getShield() {
-		return shield;
+		return (Shield) getSubsystem("shield");
 	}
 	
 	public boolean isDamaged() {
@@ -40,6 +48,14 @@ public class Ship {
 	
 	public void hit(int i) {
 		damaged = true;
+	}
+
+	private Subsystem getSubsystem(String string) {
+		return subsystems.get(string);
+	}
+
+	public Object getEngine() {
+		return (Engine) getSubsystem("engine");
 	}
 	
 }

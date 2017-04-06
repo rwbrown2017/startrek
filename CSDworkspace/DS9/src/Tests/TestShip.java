@@ -32,7 +32,7 @@ public class TestShip {
 	
 	@Test
 	public void shipHitShieldBuckledSubsystemDamaged() {
-		ship.getShield().removeShieldEnergy(10001);;
+		ship.getShield().removeShieldEnergy(10001);
 		ship.hit(1);
 		assertTrue(ship.isDamaged());
 	}
@@ -40,6 +40,16 @@ public class TestShip {
 	@Test
 	public void getInitialReservedEnergy() {
 		assertEquals(100000, ship.getReservedEnergy());
+	}
+	
+	@Test
+	public void shieldSubsystemExists() {
+		assertNotNull(ship.getShield());
+	}
+	
+	@Test
+	public void engineSubsystemExists() {
+		assertNotNull(ship.getEngine());
 	}
 	
 }
