@@ -37,4 +37,10 @@ public class TestShip {
 		assertTrue(ship.isDamaged());
 	}
 
+	@Test
+	public void getInitialReservedEnergy() {
+		Ship aShip = new Ship();
+		assertTrue(aShip.getReservedEnergy() == 10000);
+	}
+	
 }
