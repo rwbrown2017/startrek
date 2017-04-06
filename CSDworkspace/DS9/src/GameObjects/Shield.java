@@ -45,7 +45,7 @@ public class Shield extends Subsystem {
 		if (isDown() || isBuckled()) {
 			setDamaged(true);
 		} else {
-			shieldEnergy = removeShieldEnergy(i);
+			removeShieldEnergy(i);
 		}
 	}
 

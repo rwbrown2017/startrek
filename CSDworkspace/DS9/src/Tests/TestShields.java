@@ -1,12 +1,13 @@
 package Tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import GameObjects.Shield;
-import GameObjects.Ship;
 
 public class TestShields {
 	
@@ -52,7 +53,8 @@ public class TestShields {
 	public void removeShieldEnergy() {
 		shield.removeShieldEnergy(1);
 		assertEquals(9999, shield.getShieldEnergy());
-
+	}
+	
 	@Test
 	public void underchargeShields() {
 		shield.removeShieldEnergy(10001);
