@@ -19,6 +19,16 @@ public class TestShields {
 	}
 	
 	@Test
+	public void minShieldEnergy() {
+		assertEquals(0, Shield.MIN_SHIELD_ENERGY);
+	}
+	
+	@Test
+	public void maxShieldEnergy() {
+		assertEquals(10000, Shield.MAX_SHIELD_ENERGY);
+	}
+	
+	@Test
 	public void shieldsStartOutLowered() {		
 		assertTrue(shield.isDown());
 	}
@@ -39,32 +49,32 @@ public class TestShields {
 	
 	@Test
 	public void shieldsStartingAmount() {
-		assertEquals(10000, shield.getShieldEnergy());
+		assertEquals(Shield.MAX_SHIELD_ENERGY, shield.getShieldEnergy());
 	}
 
 	@Test
 	public void addShieldEnergy(){
 		shield.removeShieldEnergy(1000);
 		shield.addShieldEnergy(500);
-		assertEquals(9500, shield.getShieldEnergy());
+		assertEquals(Shield.MAX_SHIELD_ENERGY-500, shield.getShieldEnergy());
 	}
 
 	@Test
 	public void removeShieldEnergy() {
 		shield.removeShieldEnergy(1);
-		assertEquals(9999, shield.getShieldEnergy());
+		assertEquals(Shield.MAX_SHIELD_ENERGY-1, shield.getShieldEnergy());
 	}
 	
 	@Test
 	public void underchargeShields() {
-		shield.removeShieldEnergy(10001);
-		assertEquals(0, shield.getShieldEnergy());
+		shield.removeShieldEnergy(Shield.MAX_SHIELD_ENERGY+1);
+		assertEquals(Shield.MIN_SHIELD_ENERGY, shield.getShieldEnergy());
 	}
 	
 	@Test
 	public void overchargedShields(){
 		shield.addShieldEnergy(1);
-		assertEquals(10000, shield.getShieldEnergy());
+		assertEquals(Shield.MAX_SHIELD_ENERGY, shield.getShieldEnergy());
 	}
 	
 	@Test
@@ -75,14 +85,14 @@ public class TestShields {
 	@Test
 	public void shieldBuckled() {
 		shield.raise();
-		shield.hit(10001);
+		shield.hit(Shield.MAX_SHIELD_ENERGY+1);
 		assertTrue(shield.isBuckled());
 	}
 
 	@Test
 	public void shieldDamaged() {
 		shield.raise();
-		shield.hit(10001);
+		shield.hit(Shield.MAX_SHIELD_ENERGY+1);
 		shield.hit(1);
 		assertTrue(shield.isDamaged());
 	}

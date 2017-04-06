@@ -39,8 +39,7 @@ public class TestShip {
 
 	@Test
 	public void getInitialReservedEnergy() {
-		Ship aShip = new Ship();
-		assertEquals(100000, aShip.getReservedEnergy());
+		assertEquals(100000, ship.getReservedEnergy());
 	}
 	
 }

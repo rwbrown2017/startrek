@@ -2,12 +2,15 @@ package GameObjects;
 
 public class Shield extends Subsystem {
 
-	private boolean down = true;
+	public static final int MIN_SHIELD_ENERGY = 0;
+	public static final int MAX_SHIELD_ENERGY = 10000;
 
-	private static int shieldEnergy = 10000;
+	private boolean down = true;
+	
+	private static int shieldEnergy = MAX_SHIELD_ENERGY;
 	
 	public Shield() {
-		this.shieldEnergy = 10000;
+		this.shieldEnergy = MAX_SHIELD_ENERGY;
 	}
 
 	public boolean isDown() {
@@ -24,12 +27,12 @@ public class Shield extends Subsystem {
 	
 	public void addShieldEnergy(int energy){		
 		   shieldEnergy += energy;
-		   shieldEnergy = Integer.min(shieldEnergy, 10000);
+		   shieldEnergy = Integer.min(shieldEnergy, MAX_SHIELD_ENERGY);
 	}
 
 	public void removeShieldEnergy(int energy){		
 		   shieldEnergy -= energy;
-		   shieldEnergy = Integer.max(shieldEnergy, 0);
+		   shieldEnergy = Integer.max(shieldEnergy, MIN_SHIELD_ENERGY);
 	}
 	
 	public int getShieldEnergy() {
@@ -38,7 +41,7 @@ public class Shield extends Subsystem {
 
 
 	public boolean isBuckled() {
-		return shieldEnergy <= 0;
+		return shieldEnergy <= MIN_SHIELD_ENERGY;
 	}
 
 	public void hit(int i) {
