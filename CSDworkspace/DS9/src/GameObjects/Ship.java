@@ -46,6 +46,7 @@ public class Ship {
 		    if (count == index) {
 		    	return value;
 		    }
+		    count++;
 		}
 		return null;
 	}
@@ -87,15 +88,17 @@ public class Ship {
 	}
 	
 	public void hit(int i) {
-		if (getShield().isDown() || getShield().isBuckled()) {
+		Shield shield = getShield();
+		if (shield.isDown() || shield.isBuckled()) {
 			damageRandomSubsystem();
 		} else {
-			getShield().hit(i);
+			shield.hit(i);
 		}
 	}
 
 	private void damageRandomSubsystem() {
-		getRandomSubsystem().setDamaged(true);
+		Subsystem subsystem = getRandomSubsystem();
+		subsystem.setDamaged(true);
 	}
 
 	public Subsystem getRandomSubsystem() {

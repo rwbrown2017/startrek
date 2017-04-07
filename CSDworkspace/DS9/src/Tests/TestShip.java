@@ -65,6 +65,9 @@ public class TestShip {
 	
 	@Test
 	public void shipHitShieldBuckledSubsystemDamaged() {
+		RandomizationEngine engine = new RandomizationEngineForTestingOnly(2);
+		ship.setRandomizationEngine(engine);
+		ship.getShield().raise();
 		ship.hit(10001);
 		ship.hit(1);
 		assertTrue(ship.isDamaged());
