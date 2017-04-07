@@ -1,26 +1,26 @@
 package GameObjects;
- 
+
 
 public class Location {
-	private int quadrant ;
-	private int sector;
-	public Location(int q, int s){
+	private Quadrant quadrant ;
+	private Sector sector;
+	public Location(Quadrant q, Sector s){
 		this.quadrant = q;
 		this.sector = s ;
 	}
-	public int getQuadrant(){
+	public Quadrant getQuadrant(){
 		return this.quadrant;
 	}
-	
-	public int getSector(){
+
+	public Sector getSector(){
 		return this.sector;
-	}	
-	
-	public void setQuadrant(int q){
+	}
+
+	public void setQuadrant(Quadrant q){
 		this.quadrant = q;
 	}
-	
-	public void setSector(int s){
+
+	public void setSector(Sector s){
 		this.sector = s;
 	}
 }

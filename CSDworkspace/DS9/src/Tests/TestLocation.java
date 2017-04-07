@@ -5,17 +5,17 @@ import org.junit.Test;
 import GameObjects.*;
 
 public class TestLocation {
-	private Location curLoc = new Location(4,5);
-	
+	private Location curLoc = new Location(new Quadrant(), new Sector());
+
 	@Test
 	public void testGetQuadrant() {
-		int quadrant = curLoc.getQuadrant();
+		Quadrant quadrant = curLoc.getQuadrant();
 		assertEquals(quadrant,4);
 	}
-	
+
 	@Test
 	public void testGetSector() {
-		int sector = curLoc.getSector();
+		Sector sector = curLoc.getSector();
 		assertEquals(sector,5);
 	}
 
