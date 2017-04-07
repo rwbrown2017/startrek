@@ -80,7 +80,15 @@ public class Ship {
 	}
 	
 	public void hit(int i) {
-		damaged = true;
+		if (getShield().isDown() || getShield().isBuckled()) {
+			damageRandomSubsystem();
+		} else {
+			getShield().hit(i);
+		}
+	}
+
+	private void damageRandomSubsystem() {
+		getRandomSubsystem().setDamaged(true);
 	}
 
 	public Subsystem getRandomSubsystem() {

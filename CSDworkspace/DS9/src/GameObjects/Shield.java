@@ -45,11 +45,7 @@ public class Shield extends Subsystem {
 	}
 
 	public void hit(int i) {
-		if (isDown() || isBuckled()) {
-			setDamaged(true);
-		} else {
-			removeShieldEnergy(i);
-		}
+		removeShieldEnergy(i);
 	}
 
 }
