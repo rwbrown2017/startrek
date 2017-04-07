@@ -1,14 +1,12 @@
 package GameObjects;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Ship {
 	
-	private static int reservedEnergy = 100000;
-	private boolean damaged = false;
+	public static final int MAX_SHIP_ENERGY = 100000;
+	private static int reservedEnergy = MAX_SHIP_ENERGY;
 	private boolean functioning = true;
 	private boolean repaired = false;
 	
@@ -30,8 +28,8 @@ public class Ship {
 	}
 
 	public void addSubsystems() {
-		subsystems.put("shield", new Shield());
-		subsystems.put("engine", new Engine());
+		subsystems.put("shield", new Shield()); // Index: 0
+		subsystems.put("engine", new Engine()); // Index: 1
 	}
 	
 	private Subsystem getSubsystem(String string) {
@@ -41,7 +39,7 @@ public class Ship {
 	private Subsystem getSubsystemByIndex(int index) {
 		int count = 0;
 		for (Map.Entry<String, Subsystem> entry : subsystems.entrySet()) {
-		    String key = entry.getKey();
+		    //String key = entry.getKey();
 		    Subsystem value = entry.getValue();
 		    if (count == index) {
 		    	return value;
@@ -51,7 +49,7 @@ public class Ship {
 		return null;
 	}
 
-	public Object getEngine() {
+	public Engine getEngine() {
 		return (Engine) getSubsystem("engine");
 	}
 	
@@ -61,7 +59,7 @@ public class Ship {
 	
 	public boolean isDamaged() {
 		for (Map.Entry<String, Subsystem> entry : subsystems.entrySet()) {
-		    String key = entry.getKey();
+		    //String key = entry.getKey();
 		    Subsystem value = entry.getValue();
 		    if (value.isDamaged()) {
 		    	return true;
@@ -93,7 +91,9 @@ public class Ship {
 		if (shield.isDown() || shield.isBuckled()) {
 			damageRandomSubsystem();
 		} else {
-			shield.hit(i);
+			if (shield.hit(i) <= 0) {
+				damageRandomSubsystem();
+			}
 		}
 	}
 
@@ -104,7 +104,8 @@ public class Ship {
 
 	public Subsystem getRandomSubsystem() {
 		int subsystemNumber = randomEngine.getRandomNumber(subsystems.size());
-		return getSubsystemByIndex(subsystemNumber - 1);
+		Subsystem subsystem = getSubsystemByIndex(subsystemNumber - 1);
+		return subsystem;
 	}
 	
 }

@@ -15,4 +15,9 @@ public class Subsystem {
 	public boolean isDamaged() {
 		return damaged;
 	}
+	
+	public void repair() {
+		this.damaged = false;
+	}
+	
 }

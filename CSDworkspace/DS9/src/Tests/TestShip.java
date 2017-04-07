@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import GameObjects.RandomizationEngine;
+import GameObjects.Engine;
 import GameObjects.Shield;
 import GameObjects.Ship;
 
@@ -62,43 +62,69 @@ public class TestShip {
 	
 	@Test
 	public void setRandomizer() {
-		RandomizationEngine engine = new RandomizationEngineForTestingOnly(7);
-		ship.setRandomizationEngine(engine);
+		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(7));
 		assertEquals(7, ship.getRandomizationEngine().getRandomNumber(10));
 	}
 	
 	@Test
 	public void getRandomSubsystemEngine() {
-		RandomizationEngine engine = new RandomizationEngineForTestingOnly(2);
-		ship.setRandomizationEngine(engine);
+		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(2));
 		assertEquals(ship.getEngine(), ship.getRandomSubsystem());
 	}
 	
 	@Test
 	public void getRandomSubsystemShield() {
-		RandomizationEngine engine = new RandomizationEngineForTestingOnly(1);
-		ship.setRandomizationEngine(engine);
+		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(1));
 		assertEquals(ship.getShield(), ship.getRandomSubsystem());
 	}
 	
 	@Test
-	public void shipHitShieldBuckledSubsystemDamaged() {
-		RandomizationEngine engine = new RandomizationEngineForTestingOnly(2);
-		ship.setRandomizationEngine(engine);
+	public void shipHitShieldBuckledSomeSubsystemDamaged() {
+		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(2));
 		ship.getShield().raise();
-		ship.hit(10001);
-		assertTrue(ship.isDamaged());
+		ship.hit(Shield.MAX_SHIELD_ENERGY+1);
+		assertTrue(ship.isDamaged()); // It is Engine
+	}
+	
+	@Test
+	public void shipHitShieldBuckledShieldSubsystemDamaged() {
+		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(1));
+		ship.getShield().raise();
+		ship.hit(Shield.MAX_SHIELD_ENERGY+1);
+		Shield shield = ship.getShield();
+		assertTrue(shield.isDamaged());
+	}
+	
+	@Test
+	public void shipHitShieldBuckledEngineSubsystemDamaged() {
+		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(2));
+		ship.getShield().raise();
+		ship.hit(Shield.MAX_SHIELD_ENERGY+1);
+		Engine engine = ship.getEngine();
+		assertTrue(engine.isDamaged());
 	}
 	
 	@Test
 	public void shieldWontRaiseIfDamaged() {
-		RandomizationEngine engine = new RandomizationEngineForTestingOnly(1);
-		ship.setRandomizationEngine(engine);
+		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(1));
 		Shield shield = ship.getShield();
 		shield.raise();
-		ship.hit(10001);
+		ship.hit(Shield.MAX_SHIELD_ENERGY+1);
 		shield.raise();
 		assertTrue(shield.isDown());
+	}
+	
+	@Test
+	public void repairDamagedSubsystem() {
+		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(1));
+		Shield shield = ship.getShield();
+		shield.raise();
+		ship.hit(Shield.MAX_SHIELD_ENERGY+1);
+		shield.raise();
+		assertTrue(shield.isDown());
+		shield.repair();
+		shield.raise();
+		assertFalse(shield.isDown());
 	}
 	
 }
