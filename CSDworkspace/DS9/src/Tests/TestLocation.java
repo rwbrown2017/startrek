@@ -5,6 +5,7 @@ import org.junit.Test;
 import GameObjects.*;
 
 public class TestLocation {
+	
 	private Location curLoc = new Location(new Quadrant(), new Sector());
 
 	@Test

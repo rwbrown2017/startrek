@@ -8,6 +8,8 @@ import org.junit.Test;
 import Errors.InsufficientEnergyException;
 import Errors.SubsystemDamagedException;
 import GameObjects.Engine;
+import GameObjects.Quadrant;
+import GameObjects.Sector;
 import GameObjects.Shield;
 import GameObjects.Ship;
 
@@ -140,4 +142,53 @@ public class TestShip {
 		assertFalse(shield.isDown());
 	}
 	
+	@Test
+	public void shipWarp0TooLow() {
+		Quadrant quadrant;
+		Sector sector;
+		ship.warp(-1, quadrant, sector);
+	}
+	
+	@Test
+	public void shipWarp0LowerBound() {
+		Quadrant quadrant;
+		Sector sector;
+		ship.warp(0, quadrant, sector);
+	}
+	
+	@Test
+	public void shipWarp10UpperBound() {
+		Quadrant quadrant;
+		Sector sector;
+		ship.warp(10, quadrant, sector);
+	}
+	
+	@Test
+	public void shipWarp11OutOfRange() {
+		Quadrant quadrant;
+		Sector sector;
+		ship.warp(11, quadrant, sector);
+	}
+	
+	@Test
+	public void afterWarpEnergyIsConsumed() {
+		int energyBefore = ship.getReservedEnergy();
+		Quadrant quadrant;
+		Sector sector;
+		ship.setLocation(quadrant, sector);
+		ship.warp(5, quadrant, sector);
+		int energyAfter = ship.getReservedEnergy();
+		assertTrue(energyAfter < energyBefore);
+	}
+	
+	@Test
+	public void afterWarpSameLocationEnergyNotConsumed() {
+		int energyBefore = ship.getReservedEnergy();
+		Quadrant quadrant;
+		Sector sector;
+		ship.setLocation(quadrant, sector);
+		ship.warp(5, quadrant, sector);
+		int energyAfter = ship.getReservedEnergy();
+		assertEquals(energyAfter, energyBefore);
+	}
 }

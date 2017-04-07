@@ -7,13 +7,15 @@ import Errors.InsufficientEnergyException;
 import Errors.SubsystemDamagedException;
 import Util.RandomizationEngine;
 
-public class Ship {
+public class Ship extends Entity {
 	
 	public static final int MIN_SHIP_ENERGY = 0;
 	public static final int MAX_SHIP_ENERGY = 100000;
 	private static int reservedEnergy = MAX_SHIP_ENERGY;
 	private boolean functioning = true;
 	private boolean repaired = false;
+	
+	private Location currentLoc;
 	
 	LinkedHashMap<String, Subsystem> subsystems;
 	RandomizationEngine randomEngine;
@@ -119,6 +121,10 @@ public class Ship {
 		int subsystemNumber = randomEngine.getRandomNumber(subsystems.size());
 		Subsystem subsystem = getSubsystemByIndex(subsystemNumber - 1);
 		return subsystem;
+	}
+	
+	public Location getLocation(){
+		return this.currentLoc;
 	}
 	
 }
