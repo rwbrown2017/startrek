@@ -67,10 +67,18 @@ public class TestShip {
 		assertEquals(7, ship.getRandomizationEngine().getRandomNumber(10));
 	}
 	
-	public void getRandomSubsystem() {
+	@Test
+	public void getRandomSubsystemEngine() {
 		RandomizationEngine engine = new RandomizationEngineForTestingOnly(2);
 		ship.setRandomizationEngine(engine);
 		assertEquals(ship.getEngine(), ship.getRandomSubsystem());
+	}
+	
+	@Test
+	public void getRandomSubsystemShield() {
+		RandomizationEngine engine = new RandomizationEngineForTestingOnly(1);
+		ship.setRandomizationEngine(engine);
+		assertEquals(ship.getShield(), ship.getRandomSubsystem());
 	}
 	
 	@Test
@@ -79,7 +87,6 @@ public class TestShip {
 		ship.setRandomizationEngine(engine);
 		ship.getShield().raise();
 		ship.hit(10001);
-		ship.hit(1);
 		assertTrue(ship.isDamaged());
 	}
 	
@@ -90,7 +97,6 @@ public class TestShip {
 		Shield shield = ship.getShield();
 		shield.raise();
 		ship.hit(10001);
-		ship.hit(1);
 		shield.raise();
 		assertTrue(shield.isDown());
 	}

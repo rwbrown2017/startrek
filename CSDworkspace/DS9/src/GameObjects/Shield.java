@@ -34,8 +34,11 @@ public class Shield extends Subsystem {
 
 	public void removeShieldEnergy(int energy){		
 		   shieldEnergy -= energy;
-		   if (shieldEnergy <= 0) {
+		   if (shieldEnergy == 0) {
 			   down = true;
+		   } else if (shieldEnergy < 0) {
+			   down = true;
+			   setDamaged(true);
 		   }
 		   shieldEnergy = Integer.max(shieldEnergy, MIN_SHIELD_ENERGY);
 	}
