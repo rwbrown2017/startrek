@@ -74,27 +74,6 @@ public class TestShip {
 	}
 	
 	@Test
-	public void moveEnergyInsufficient() {
-		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(1));
-		Shield shield = ship.getShield();
-		shield.raise();
-		try {
-			// use all the reserved energy
-			for (int i = 0; i < 10; i++) {
-				ship.hit(Shield.MAX_SHIELD_ENERGY);
-				ship.transferEnergy(Shield.MAX_SHIELD_ENERGY);
-			}
-			ship.hit(1);
-			ship.transferEnergy(1);
-		} catch (SubsystemDamagedException e) {
-			// not expected
-		} catch (InsufficientEnergyException e) {
-			return;
-		}
-		fail();
-	}
-	
-	@Test
 	public void setRandomizer() {
 		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(7));
 		assertEquals(7, ship.getRandomizationEngine().getRandomNumber(10));
