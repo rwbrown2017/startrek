@@ -8,7 +8,7 @@ public class TestWarpEngine {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		// TODO test nothing yet
 	}
 
 }
