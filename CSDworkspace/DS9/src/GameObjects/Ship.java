@@ -59,7 +59,14 @@ public class Ship {
 	}
 	
 	public boolean isDamaged() {
-		return damaged;
+		for (Map.Entry<String, Subsystem> entry : subsystems.entrySet()) {
+		    String key = entry.getKey();
+		    Subsystem value = entry.getValue();
+		    if (value.isDamaged()) {
+		    	return true;
+		    }
+		}
+		return false;
 	}
 	
 	public boolean isFunctioning() {

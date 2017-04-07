@@ -89,12 +89,4 @@ public class TestShields {
 		assertTrue(shield.isBuckled());
 	}
 
-	@Test
-	public void shieldDamaged() {
-		shield.raise();
-		shield.hit(Shield.MAX_SHIELD_ENERGY+1);
-		shield.hit(1);
-		assertTrue(shield.isDamaged());
-	}
-
 }

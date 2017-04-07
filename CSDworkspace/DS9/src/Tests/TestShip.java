@@ -34,13 +34,6 @@ public class TestShip {
 	public void shipRepaired() {
 		assertFalse(ship.isRepaired());
 	}
-	
-	@Test
-	public void shipHitShieldBuckledSubsystemDamaged() {
-		ship.getShield().removeShieldEnergy(10001);
-		ship.hit(1);
-		assertTrue(ship.isDamaged());
-	}
 
 	@Test
 	public void getInitialReservedEnergy() {
@@ -68,6 +61,13 @@ public class TestShip {
 		RandomizationEngine engine = new RandomizationEngineForTestingOnly(2);
 		ship.setRandomizationEngine(engine);
 		assertEquals(ship.getEngine(), ship.getRandomSubsystem());
+	}
+	
+	@Test
+	public void shipHitShieldBuckledSubsystemDamaged() {
+		ship.hit(10001);
+		ship.hit(1);
+		assertTrue(ship.isDamaged());
 	}
 	
 }
