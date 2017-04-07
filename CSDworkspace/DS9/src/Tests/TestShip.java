@@ -1,13 +1,12 @@
 package Tests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import Errors.InsufficientEnergyException;
+import Errors.SubsystemDamagedException;
 import GameObjects.Engine;
 import GameObjects.Shield;
 import GameObjects.Ship;
@@ -52,12 +51,47 @@ public class TestShip {
 	}
 	
 	@Test
-	public void moveEnergyToShields() {
+	public void moveEnergyToShields() throws SubsystemDamagedException, InsufficientEnergyException {
 		ship.getShield().raise();
 		ship.hit(2000);
 		ship.transferEnergy(1000);
 		assertEquals(99000, ship.getReservedEnergy());
 		assertEquals(9000, ship.getShield().getShieldEnergy());
+	}
+	
+	@Test
+	public void moveEnergyWithShieldsDamaged() {
+		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(1));
+		ship.hit(1);
+		try {
+			ship.transferEnergy(1);
+		} catch (SubsystemDamagedException e) {
+			return;
+		} catch (InsufficientEnergyException e) {
+			// not expected
+		}
+		fail();
+	}
+	
+	@Test
+	public void moveEnergyInsufficient() {
+		ship.setRandomizationEngine(new RandomizationEngineForTestingOnly(1));
+		Shield shield = ship.getShield();
+		shield.raise();
+		try {
+			// use all the reserved energy
+			for (int i = 0; i < 10; i++) {
+				ship.hit(Shield.MAX_SHIELD_ENERGY);
+				ship.transferEnergy(Shield.MAX_SHIELD_ENERGY);
+			}
+			ship.hit(1);
+			ship.transferEnergy(1);
+		} catch (SubsystemDamagedException e) {
+			// not expected
+		} catch (InsufficientEnergyException e) {
+			return;
+		}
+		fail();
 	}
 	
 	@Test

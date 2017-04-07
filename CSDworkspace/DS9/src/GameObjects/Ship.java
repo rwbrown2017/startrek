@@ -3,10 +3,13 @@ package GameObjects;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import Errors.InsufficientEnergyException;
+import Errors.SubsystemDamagedException;
 import Util.RandomizationEngine;
 
 public class Ship {
 	
+	public static final int MIN_SHIP_ENERGY = 0;
 	public static final int MAX_SHIP_ENERGY = 100000;
 	private static int reservedEnergy = MAX_SHIP_ENERGY;
 	private boolean functioning = true;
@@ -82,12 +85,16 @@ public class Ship {
 		return reservedEnergy;
 	}
 	
-	public int transferEnergy(int n) {
+	public int transferEnergy(int n) throws SubsystemDamagedException, InsufficientEnergyException {
 		Shield shield = getShield();
 		if (shield.isDamaged()) {
-			return -1;
+			throw new SubsystemDamagedException();
+		}
+		if (reservedEnergy < n) {
+			throw new InsufficientEnergyException();
 		}
 		reservedEnergy -= n;
+		reservedEnergy = Integer.max(reservedEnergy, MIN_SHIP_ENERGY);
 		shield.addShieldEnergy(n);
 		return n;
 	}
@@ -97,7 +104,7 @@ public class Ship {
 		if (shield.isDown() || shield.isBuckled()) {
 			damageRandomSubsystem();
 		} else {
-			if (shield.hit(i) <= 0) {
+			if (shield.hit(i) < 0) {
 				damageRandomSubsystem();
 			}
 		}
