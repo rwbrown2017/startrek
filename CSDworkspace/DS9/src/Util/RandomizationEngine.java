@@ -1,4 +1,4 @@
-package GameObjects;
+package Util;
 
 public class RandomizationEngine {
 	

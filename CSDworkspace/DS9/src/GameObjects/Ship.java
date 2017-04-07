@@ -3,6 +3,8 @@ package GameObjects;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import Util.RandomizationEngine;
+
 public class Ship {
 	
 	public static final int MAX_SHIP_ENERGY = 100000;

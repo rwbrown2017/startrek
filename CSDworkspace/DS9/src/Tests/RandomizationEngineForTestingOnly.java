@@ -1,6 +1,6 @@
 package Tests;
 
-import GameObjects.RandomizationEngine;
+import Util.RandomizationEngine;
 
 public class RandomizationEngineForTestingOnly extends RandomizationEngine {
 
