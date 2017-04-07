@@ -10,7 +10,7 @@ public class Shield extends Subsystem {
 	private static int shieldEnergy = MAX_SHIELD_ENERGY;
 	
 	public Shield() {
-		this.shieldEnergy = MAX_SHIELD_ENERGY;
+		this.shieldEnergy = MAX_SHIELD_ENERGY;		
 	}
 
 	public boolean isDown() {
