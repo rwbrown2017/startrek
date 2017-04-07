@@ -84,6 +84,7 @@ public class Ship {
 	
 	public int transferEnergy(int n) {
 		reservedEnergy -= n;
+		getShield().addShieldEnergy(n);
 		return n;
 	}
 	

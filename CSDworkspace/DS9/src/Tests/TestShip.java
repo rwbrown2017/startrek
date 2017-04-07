@@ -52,6 +52,15 @@ public class TestShip {
 	}
 	
 	@Test
+	public void moveEnergyToShields() {
+		ship.getShield().raise();
+		ship.hit(2000);
+		ship.transferEnergy(1000);
+		assertEquals(99000, ship.getReservedEnergy());
+		assertEquals(9000, ship.getShield().getShieldEnergy());
+	}
+	
+	@Test
 	public void setRandomizer() {
 		RandomizationEngine engine = new RandomizationEngineForTestingOnly(7);
 		ship.setRandomizationEngine(engine);
