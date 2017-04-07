@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import GameObjects.RandomizationEngine;
+import GameObjects.Shield;
 import GameObjects.Ship;
 
 public class TestShip {
@@ -71,6 +72,18 @@ public class TestShip {
 		ship.hit(10001);
 		ship.hit(1);
 		assertTrue(ship.isDamaged());
+	}
+	
+	@Test
+	public void shieldWontRaiseIfDamaged() {
+		RandomizationEngine engine = new RandomizationEngineForTestingOnly(1);
+		ship.setRandomizationEngine(engine);
+		Shield shield = ship.getShield();
+		shield.raise();
+		ship.hit(10001);
+		ship.hit(1);
+		shield.raise();
+		assertTrue(shield.isDown());
 	}
 	
 }

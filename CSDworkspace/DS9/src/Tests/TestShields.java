@@ -88,5 +88,7 @@ public class TestShields {
 		shield.hit(Shield.MAX_SHIELD_ENERGY+1);
 		assertTrue(shield.isBuckled());
 	}
+	
+
 
 }

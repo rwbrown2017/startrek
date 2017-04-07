@@ -18,7 +18,9 @@ public class Shield extends Subsystem {
 	}
 
 	public void raise() {
-		down = false;
+		if (!isDamaged()) {
+			down = false;
+		}
 	}
 
 	public void lower() {
@@ -32,6 +34,9 @@ public class Shield extends Subsystem {
 
 	public void removeShieldEnergy(int energy){		
 		   shieldEnergy -= energy;
+		   if (shieldEnergy <= 0) {
+			   down = true;
+		   }
 		   shieldEnergy = Integer.max(shieldEnergy, MIN_SHIELD_ENERGY);
 	}
 	
